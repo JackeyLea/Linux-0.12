@@ -20,8 +20,8 @@ CPP	=cpp -nostdinc -Iinclude
 # This can be either FLOPPY, /dev/xxxx or empty, in which case the
 # default of /dev/hd6 is used by 'build'.
 #
-ROOT_DEV=/dev/hd6
-SWAP_DEV=/dev/hd2
+ROOT_DEV=
+SWAP_DEV=
 
 ARCHIVES=kernel/kernel.o mm/mm.o fs/fs.o
 DRIVERS =kernel/blk_drv/blk_drv.a kernel/chr_drv/chr_drv.a
@@ -39,7 +39,7 @@ LIBS	=lib/lib.a
 
 all:	Image
 
-Image: boot/bootsect boot/setup tools/system tools/build -m elf_i386
+Image: boot/bootsect boot/setup tools/system tools/build
 	tools/build boot/bootsect boot/setup tools/system $(ROOT_DEV) \
 		$(SWAP_DEV) > Image
 	sync
