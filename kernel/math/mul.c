@@ -16,7 +16,7 @@ static void shift(int * c)
 		"movl 4(%0),%%eax ; adcl %%eax,4(%0)\n\t"
 		"movl 8(%0),%%eax ; adcl %%eax,8(%0)\n\t"
 		"movl 12(%0),%%eax ; adcl %%eax,12(%0)"
-		::"r" ((long) c):"ax");
+		::"r" ((long) c):) ;
 }
 
 static void mul64(const temp_real * a, const temp_real * b, int * c)
@@ -40,7 +40,7 @@ static void mul64(const temp_real * a, const temp_real * b, int * c)
 		"adcl %%edx,8(%2)\n\t"
 		"adcl $0,12(%2)"
 		::"b" ((long) a),"c" ((long) b),"D" ((long) c)
-		:"ax","dx");
+		:) ;
 }
 
 void fmul(const temp_real * src1, const temp_real * src2, temp_real * result)

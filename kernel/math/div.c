@@ -16,7 +16,7 @@ static void shift_left(int * c)
 		"movl 4(%0),%%eax ; adcl %%eax,4(%0)\n\t"
 		"movl 8(%0),%%eax ; adcl %%eax,8(%0)\n\t"
 		"movl 12(%0),%%eax ; adcl %%eax,12(%0)"
-		::"r" ((long) c):"ax");
+		::"r" ((long) c):) ;
 }
 
 static void shift_right(int * c)

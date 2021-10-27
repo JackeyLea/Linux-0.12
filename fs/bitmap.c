@@ -14,7 +14,7 @@
 __asm__("cld\n\t" \
 	"rep\n\t" \
 	"stosl" \
-	::"a" (0),"c" (BLOCK_SIZE/4),"D" ((long) (addr)):"cx","di")
+	::"a" (0),"c" (BLOCK_SIZE/4),"D" ((long) (addr)):) 
 
 #define set_bit(nr,addr) ({\
 register int res __asm__("ax"); \
@@ -41,7 +41,7 @@ __asm__("cld\n" \
 	"cmpl $8192,%%ecx\n\t" \
 	"jl 1b\n" \
 	"3:" \
-	:"=c" (__res):"c" (0),"S" (addr):"ax","dx","si"); \
+	:"=c" (__res):"c" (0),"S" (addr):) ; \
 __res;})
 
 int free_block(int dev, int block)

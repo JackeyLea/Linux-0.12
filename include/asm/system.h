@@ -11,7 +11,7 @@ __asm__ ("movl %%esp,%%eax\n\t" \
 	"mov %%ax,%%es\n\t" \
 	"mov %%ax,%%fs\n\t" \
 	"mov %%ax,%%gs" \
-	:::"ax")
+	:::) 
 
 #define sti() __asm__ ("sti"::)
 #define cli() __asm__ ("cli"::)

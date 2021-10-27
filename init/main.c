@@ -20,10 +20,10 @@
  * won't be any messing with the stack from main(), but we define
  * some others too.
  */
-static inline _syscall0(int,fork)
-static inline _syscall0(int,pause)
-static inline _syscall1(int,setup,void *,BIOS)
-static inline _syscall0(int,sync)
+inline _syscall0(int,fork)
+inline _syscall0(int,pause)
+inline _syscall1(int,setup,void *,BIOS)
+inline _syscall0(int,sync)
 
 #include <linux/tty.h>
 #include <linux/sched.h>
@@ -53,6 +53,10 @@ extern void floppy_init(void);
 extern void mem_init(long start, long end);
 extern long rd_init(long mem_start, int length);
 extern long kernel_mktime(struct tm * tm);
+
+void puts(){
+	
+}
 
 static int sprintf(char * str, const char *fmt, ...)
 {
@@ -173,10 +177,10 @@ void main(void)		/* This really IS void, no error here. */
  * task can run, and if not we return here.
  */
 	for(;;)
-		__asm__("int $0x80"::"a" (__NR_pause):"ax");
+		__asm__("int $0x80"::"a" (__NR_pause):) ;
 }
 
-static int printf(const char *fmt, ...)
+int printf(const char *fmt, ...)
 {
 	va_list args;
 	int i;

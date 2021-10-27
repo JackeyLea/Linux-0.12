@@ -7,12 +7,12 @@ RAMDISK = #-DRAMDISK=512
 AS86	=as86 -0 -a
 LD86	=ld86 -0
 
-AS	=gas
-LD	=gld
+AS	=as --32
+LD	=ld -e startup_32 -m elf_i386
 LDFLAGS	=-s -x -M
 CC	=gcc $(RAMDISK)
-CFLAGS	=-Wall -O -fstrength-reduce -fomit-frame-pointer \
--fcombine-regs -mstring-insns
+CFLAGS	=-Wall -fno-stack-protector -O -m32 -fstrength-reduce -fomit-frame-pointer \
+ 
 CPP	=cpp -nostdinc -Iinclude
 
 #
@@ -39,7 +39,7 @@ LIBS	=lib/lib.a
 
 all:	Image
 
-Image: boot/bootsect boot/setup tools/system tools/build
+Image: boot/bootsect boot/setup tools/system tools/build -m elf_i386
 	tools/build boot/bootsect boot/setup tools/system $(ROOT_DEV) \
 		$(SWAP_DEV) > Image
 	sync

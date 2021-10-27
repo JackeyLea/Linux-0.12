@@ -17,7 +17,7 @@ extern void free_page(unsigned long addr);
 void swap_free(int page_nr);
 void swap_in(unsigned long *table_ptr);
 
-extern inline volatile void oom(void)
+static inline volatile void oom(void)
 {
 	printk("out of memory\n\r");
 	do_exit(SIGSEGV);
